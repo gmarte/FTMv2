@@ -1,15 +1,17 @@
+"use client"; 
+
 import React from 'react'
 import Image from "next/image";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
 import logo from '@/assets/FTM_LOGO.png';
+import Avatar from 'react-avatar';
 
 
 function Header() {
   return (
   <header>
     <div className='flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-2xl'>
-
       <div className='absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-pink-400 to-[#0055D1]  rounded-md filter blur-3xl opacity-50 -z-50' />
       <Image
           src={logo}
@@ -26,8 +28,9 @@ function Header() {
           <input type='text' placeholder='Search' className='flex-1 outline-none p-2' />
           <button type='submit' hidden>Search</button>
         </form>
-        {/* avatar */}            
-        <span color='#0055D1'>GM</span>         
+        {/* avatar */}     
+        <Avatar name="Giancarlo Mars" round color="#0055D1" size="50" />
+        {/* <span color='#0055D1'>GM</span>          */}
       </div>      
      </div>
      <div className='flex items-center justify-center px-5 py-2 md:py-5'>
