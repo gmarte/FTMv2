@@ -4,19 +4,18 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request){
     // todos in body
     const {todos} = await request.json();
-    console.log(todos);
+    console.log(`this are the todos: ${todos}`);
 
     // comunicate with openAI
     const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
-        temperature: 0.8,
-        n:1,
-        stream: false,
+        // temperature: 0.8,
+        // n:1,
+        // stream: false,
         messages: [
             {
                 role: "system",
                 content: `When responding, welcome the user always as Mr. Giancarlo and say wecolme to the APP Limit the response to 200 characters`,
-
             },
             {
                 role: "user",
