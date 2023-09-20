@@ -8,9 +8,39 @@ import logo from '@/assets/FTM_LOGO.png';
 import Avatar from 'react-avatar';
 import { useBoardStore } from '@/store/BoardStore';
 import fetchSuggestions from '@/lib/fetchSuggestions';
+import { account } from '@/appwrite';
 
 
 function Header() {
+  const [userDetails, setUserDetails] = useState<User | undefined>(undefined);
+  const fetchUser = async () => {
+    try {      
+      const data = await account.get();      
+      setUserDetails(data);   
+      console.log(JSON.stringify(userDetails));
+    } catch (error) {
+      console.log("the error that happened:", error);
+      return Login();
+    }
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
+  const Login = () => {
+    try {
+      const response = account.createOAuth2Session(
+        "google",
+        "http://localhost:3000",
+        "http://localhost:3000/auth"
+      );
+      console.log(response);
+    } catch (error) {
+      console.error("Failed to create OAuth session:", error);
+    }
+  };
+
+
+
   const [board,searchString, setSearchString] = useBoardStore((state) => [
     state.board,
     state.searchString,
@@ -39,12 +69,12 @@ function Header() {
       <div className='absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-pink-400 to-[#0055D1]  rounded-md filter blur-3xl opacity-50 -z-50' />
       <Image
           src={logo}
-          alt="Family Task Manager"       
+          alt="FAMILY TASK MANAGER"       
           width={300} 
           height={100}
           className="w-44 md:w-56 pb-10 md:pb-0 object-contain"
       />
-      <p>Family task manager</p>
+      <p className='text-2xl font-bold dark:text-gray-300'>FAMILY TASK MANAGER</p>
       <div className='flex items-center space-x-5 flex-1 justify-end w-full'>
         {/* search box */}
         <form className='flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial'>
