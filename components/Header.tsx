@@ -9,12 +9,18 @@ import Avatar from 'react-avatar';
 import { useBoardStore } from '@/store/BoardStore';
 import fetchSuggestions from '@/lib/fetchSuggestions';
 import { account } from '@/appwrite';
+import { useUserStore } from '@/store/UserStore';
 
 
 function Header() {
+  const [ user ] = useUserStore((state) => [
+    state.user    
+  ]);
+  console.log(user);
   const [userDetails, setUserDetails] = useState<User | undefined>(undefined);
   const fetchUser = async () => {
     try {      
+      console.log(user);
       const data = await account.get();      
       setUserDetails(data);   
       console.log(JSON.stringify(userDetails));
@@ -81,8 +87,7 @@ function Header() {
           <MagnifyingGlassIcon className='h6 w-6 text-gray-400' />
           <input type='text' placeholder='Search' value={searchString} onChange={(e) => setSearchString(e.target.value)} className='flex-1 outline-none p-2' />
           <button type='submit' hidden>Search</button>
-        </form>
-        {/* avatar */}     
+        </form>            
         <Avatar name="Giancarlo Mars" round color="#0055D1" size="50" />
         {/* <span color='#0055D1'>GM</span>          */}
       </div>      

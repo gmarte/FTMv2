@@ -11,7 +11,8 @@ yarn dev
 # or
 pnpm dev
 ```
-deploy
+
+### deploy
 ```bash
 vercel
 ```

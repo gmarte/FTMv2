@@ -5,12 +5,15 @@ import logo from '@/assets/FTM_LOGO.png';
 import Image from 'next/image';
 import React from 'react';
 import { account } from '@/appwrite';
+import { useUserStore } from '@/store/UserStore';
 
 function Login() {
 
+    const { createUser, loginUser, loginWithOAuth } = useUserStore(); 
+
     const googleAuth = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>  ) => {
         e.preventDefault
-        account.createOAuth2Session('google', 'http://localhost:3000/', 'http://localhost:3000/auth');
+        loginWithOAuth('google');
     }
   return (    
 <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
