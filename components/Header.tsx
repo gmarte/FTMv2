@@ -10,11 +10,15 @@ import { useBoardStore } from '@/store/BoardStore';
 import fetchSuggestions from '@/lib/fetchSuggestions';
 import { account } from '@/appwrite';
 import { useUserStore } from '@/store/UserStore';
+import DarkModeToogle from './ui/DarkModeToogle';
+import UserButton from './ui/UserButton';
+import Link from 'next/link';
 
 
 function Header() {
-  const [ user ] = useUserStore((state) => [
-    state.user    
+  const [ user, setUser ] = useUserStore((state) => [
+    state.user,
+    state.setUser,
   ]);
   console.log(user);
   const [userDetails, setUserDetails] = useState<User | undefined>(undefined);
@@ -22,8 +26,8 @@ function Header() {
     try {      
       console.log(user);
       const data = await account.get();      
-      setUserDetails(data);   
-      console.log(JSON.stringify(userDetails));
+      setUser(data);   
+      console.log(JSON.stringify(user));
     } catch (error) {
       console.log("the error that happened:", error);
       return Login();
@@ -44,7 +48,6 @@ function Header() {
       console.error("Failed to create OAuth session:", error);
     }
   };
-
 
 
   const [board,searchString, setSearchString] = useBoardStore((state) => [
@@ -78,18 +81,23 @@ function Header() {
           alt="FAMILY TASK MANAGER"       
           width={300} 
           height={100}
-          className="w-44 md:w-56 pb-10 md:pb-0 object-contain"
+          className="w-20 md:w-28 pb-10 md:pb-0 object-contain"
       />
-      <p className='text-2xl font-bold dark:text-gray-300'>FAMILY TASK MANAGER</p>
-      <div className='flex items-center space-x-5 flex-1 justify-end w-full'>
-        {/* search box */}
-        <form className='flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial'>
-          <MagnifyingGlassIcon className='h6 w-6 text-gray-400' />
-          <input type='text' placeholder='Search' value={searchString} onChange={(e) => setSearchString(e.target.value)} className='flex-1 outline-none p-2' />
-          <button type='submit' hidden>Search</button>
-        </form>            
-        <Avatar name="Giancarlo Mars" round color="#0055D1" size="50" />
-        {/* <span color='#0055D1'>GM</span>          */}
+      <p className='text-2xl ml-2 font-bold dark:text-gray-300 tracking-wider'>FAMILY TASK MANAGER</p>
+      <div className='flex items-center space-x-5 flex-1 justify-end w-full'>                
+        <DarkModeToogle />     
+        { user ? (
+          <>
+            <form className='flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial'>
+              <MagnifyingGlassIcon className='h6 w-6 text-gray-400' />
+              <input type='text' placeholder='Search' value={searchString} onChange={(e) => setSearchString(e.target.value)} className='flex-1 outline-none p-2' />
+              <button type='submit' hidden>Search</button>
+            </form>            
+          </>
+        ) : (
+          <Link href='/pricing'>Pricing</Link>
+        ) }              
+        <UserButton user={user} />         
       </div>      
      </div>
      {/* <div className='flex items-center justify-center px-5 py-2 md:py-5'>
