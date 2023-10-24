@@ -1,11 +1,13 @@
 // userStore.ts
 import { create } from 'zustand';
 import { account } from '@/appwrite';
+import { NextRouter, useRouter } from 'next/router';
 
 // Define the UserState interface
 interface UserState {
     user: User | null;
     setUser: (user: User) => void;
+    setSession: (session: Session) => void;
     createUser: (email: string, password: string) => Promise<void>;
     loginUser: (email: string, password: string) => Promise<void>;
     loginWithOAuth: (provider: string) => Promise<void>;
@@ -16,6 +18,12 @@ interface UserState {
 export const useUserStore = create<UserState>((set) => ({
     user: null,
     setUser: (newUser: User) => set({ user: newUser}),
+    setSession: (newSession: Session) => set((state) => ({
+        user: state.user ? {
+            ...state.user,
+            session: newSession,
+        } : null,
+    })),       
     createUser: async (email, password) => {
         try {
             const response = await account.create('', email, password);  // Assuming this returns User information
@@ -38,9 +46,12 @@ export const useUserStore = create<UserState>((set) => ({
             console.error(error);
         }
     },
-    logOut: async() =>{
+    logOut: async() => {
+        console.log('logging out');        
         try{
-            await account.deleteSession("current");            
+            await account.deleteSession("current"); 
+            set({ user: null });
+            router.push('/');
         }catch (error) {
             console.error(error);
           }

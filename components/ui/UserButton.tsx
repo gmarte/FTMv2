@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useUserStore } from "@/store/UserStore";
  
 
-function UserButton( { user } : {user: User | null }) {
+function UserButton( { user } : {user: User | null }) {  
   const [ logOut ] = useUserStore((state) => [
     state.logOut,    
   ]);
@@ -37,14 +37,14 @@ function UserButton( { user } : {user: User | null }) {
     ); 
   return (
     <DropdownMenu>
-  <DropdownMenuTrigger><Avatar name="Giancarlo Mars" round color="#0055D1" size="50" />        </DropdownMenuTrigger>
+  <DropdownMenuTrigger><Avatar name={user.name} round color="#0055D1" size="50" />        </DropdownMenuTrigger>  
   <DropdownMenuContent>
     <DropdownMenuLabel>My Account</DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuItem>Profile</DropdownMenuItem>
     <DropdownMenuItem>Billing</DropdownMenuItem>
-    <DropdownMenuItem>Team</DropdownMenuItem>
-    <DropdownMenuItem><Button onClick={() => logOut}>Logout</Button></DropdownMenuItem>
+    <DropdownMenuItem>Team</DropdownMenuItem>    
+    <DropdownMenuItem onClick={() => logOut()}><Link href='/'>Logout</Link></DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>
 

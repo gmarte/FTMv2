@@ -16,38 +16,42 @@ import Link from 'next/link';
 
 
 function Header() {
-  const [ user, setUser ] = useUserStore((state) => [
+  const [ user, setUser, setSession ] = useUserStore((state) => [
     state.user,
     state.setUser,
+    state.setSession,
   ]);
   console.log(user);
   const [userDetails, setUserDetails] = useState<User | undefined>(undefined);
   const fetchUser = async () => {
     try {      
-      console.log(user);
-      const data = await account.get();      
-      setUser(data);   
       console.log(JSON.stringify(user));
+      const data = await account.getSession("current");    
+      if (data) { 
+        setUser(await account.get()); 
+      }
+      setSession(data);   
+      console.log(JSON.stringify(data));
     } catch (error) {
       console.log("the error that happened:", error);
-      return Login();
+      return error;
     }
   };
   useEffect(() => {
     fetchUser();
   }, []);
-  const Login = () => {
-    try {
-      const response = account.createOAuth2Session(
-        "google",
-        "http://localhost:3000",
-        "http://localhost:3000/auth"
-      );
-      console.log(response);
-    } catch (error) {
-      console.error("Failed to create OAuth session:", error);
-    }
-  };
+  // const Login = () => {
+  //   try {
+  //     const response = account.createOAuth2Session(
+  //       "google",
+  //       "http://localhost:3000",
+  //       "http://localhost:3000/auth"
+  //     );
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.error("Failed to create OAuth session:", error);
+  //   }
+  // };
 
 
   const [board,searchString, setSearchString] = useBoardStore((state) => [
