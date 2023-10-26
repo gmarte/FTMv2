@@ -5,7 +5,6 @@ import Image from "next/image";
 import { ArrowUturnDownIcon, MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
 import logo from '@/assets/FTM_LOGO.png';
-import Avatar from 'react-avatar';
 import { useBoardStore } from '@/store/BoardStore';
 import fetchSuggestions from '@/lib/fetchSuggestions';
 import { account } from '@/appwrite';
@@ -39,19 +38,7 @@ function Header() {
   };
   useEffect(() => {
     fetchUser();
-  }, []);
-  // const Login = () => {
-  //   try {
-  //     const response = account.createOAuth2Session(
-  //       "google",
-  //       "http://localhost:3000",
-  //       "http://localhost:3000/auth"
-  //     );
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.error("Failed to create OAuth session:", error);
-  //   }
-  // };
+  }, []);  
 
 
   const [board,searchString, setSearchString] = useBoardStore((state) => [
@@ -78,45 +65,39 @@ function Header() {
   }, [board]);
   return (
   <header>
-    <div className='flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-2xl mb-5'>
+    <div className=' mx-auto max-w-7xl flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-2xl mb-5'>
       <div className='absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-pink-400 to-[#0055D1]  rounded-md filter blur-3xl opacity-50 -z-50' />
-      <Image
+      <Link href='/'>
+      <Image        
           src={logo}
           alt="FAMILY TASK MANAGER"       
           width={300} 
           height={100}
           className="w-20 md:w-28 pb-10 md:pb-0 object-contain"
       />
-      <p className='text-2xl ml-2 font-bold dark:text-gray-300 tracking-wider'>FAMILY TASK MANAGER</p>
-      <div className='flex items-center space-x-5 flex-1 justify-end w-full'>                
-        <DarkModeToogle />     
+      </Link>
+      <Link href='/'>
+      {/* <h1 className="scroll-m-20 ml-2 text-4xl font-extrabold tracking-wider lg:text-4xl"> */}
+      <h1 className='ml-2 text-4xl font-extrabold tracking-wider sm:text-6xl'>
+      Family Task Manager
+      </h1>
+      </Link>
+      <div className='flex items-center space-x-5 flex-1 justify-end w-full'>                        
         { user ? (
           <>
-            <form className='flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial'>
+            <form className='flex items-center space-x-5 bg-white rounded-md p-1 shadow-md flex-1 md:flex-initial'>
               <MagnifyingGlassIcon className='h6 w-6 text-gray-400' />
-              <input type='text' placeholder='Search' value={searchString} onChange={(e) => setSearchString(e.target.value)} className='flex-1 outline-none p-2' />
+              <input type='text' placeholder='Search' value={searchString} onChange={(e) => setSearchString(e.target.value)} className='flex-1 outline-none p-1' />
               <button type='submit' hidden>Search</button>
             </form>            
           </>
         ) : (
           <Link href='/pricing'>Pricing</Link>
         ) }              
+        <DarkModeToogle />  
         <UserButton user={user} />         
       </div>      
-     </div>
-     {/* <div className='flex items-center justify-center px-5 py-2 md:py-5'>
-        <p className='flex items-center p-5 text-sm font-light pr-5 shadow-xl rounded-xl w-fit bg-white italic max-w-3xl text-[#0055D1]'>
-          <UserCircleIcon className={`inline-block h10 w-10 text-[#0055D1] mr-1 ${
-            loading && "animate-spin"
-          }`
-        } />
-        {
-          suggestion && !loading
-          ? suggestion 
-          : "GPT is sumarizing your tasks for the day..."
-        }          
-        </p>
-      </div> */}
+     </div>     
   </header>
   );  
 }

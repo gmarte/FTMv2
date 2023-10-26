@@ -15,14 +15,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='bg-[#F5F6F8]'>
+      {/* <body className='bg-[#F5F6F8]'> */}
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        >          
-        {children}
+        >        
+        {children}        
         <Modal />
         </ThemeProvider>
       </body>

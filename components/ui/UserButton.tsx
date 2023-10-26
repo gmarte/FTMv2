@@ -15,6 +15,8 @@ import { useUserStore } from "@/store/UserStore";
  
 
 function UserButton( { user } : {user: User | null }) {  
+  //subscription
+
   const [ logOut ] = useUserStore((state) => [
     state.logOut,    
   ]);
@@ -36,10 +38,10 @@ function UserButton( { user } : {user: User | null }) {
         </>
     ); 
   return (
-    <DropdownMenu>
-  <DropdownMenuTrigger><Avatar name={user.name} round color="#0055D1" size="50" />        </DropdownMenuTrigger>  
+  <DropdownMenu>
+  <DropdownMenuTrigger><Avatar name={user.name} round color="#0055D1" size="45" /></DropdownMenuTrigger>  
   <DropdownMenuContent>
-    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuItem>Profile</DropdownMenuItem>
     <DropdownMenuItem>Billing</DropdownMenuItem>
