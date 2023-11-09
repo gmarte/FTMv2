@@ -1,6 +1,7 @@
 import Modal from '@/components/Modal'
 import './globals.css'
 import type { Metadata } from 'next'
+import { ThemeProvider } from '@/components/ui/ThemeProvider'
 
 export const metadata: Metadata = {
   title: 'FTM 2.0',
@@ -14,9 +15,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='bg-[#F5F6F8]'>
-        {children}
+      {/* <body className='bg-[#F5F6F8]'> */}
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >        
+        {children}        
         <Modal />
+        </ThemeProvider>
       </body>
     </html>
   )
