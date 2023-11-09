@@ -1,7 +1,7 @@
 // userStore.ts
 import { create } from 'zustand';
 import { account } from '@/appwrite';
-import { NextRouter, useRouter } from 'next/router';
+// import { NextRouter, useRouter } from 'next/router';
 
 // Define the UserState interface
 interface UserState {
@@ -51,7 +51,7 @@ export const useUserStore = create<UserState>((set) => ({
         try{
             await account.deleteSession("current"); 
             set({ user: null });
-            router.push('/');
+            // router.push('/');
         }catch (error) {
             console.error(error);
           }

@@ -13,9 +13,7 @@ function Register() {
   ]);
 
   useEffect(() => {
-    // You'll need to replace this with however you're determining logged-in status.
-    // This could be checking for a token in localStorage, a global state, etc.    
-
+    
     if (!user) {
       // If not logged in, redirect to the login page
       router.push('auth/login');
