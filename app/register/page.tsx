@@ -27,7 +27,7 @@ function Register() {
       <div className='mx-auto max-w-7xl px-6 pb-96 pt-24 text-center sm:pt-32 lg:px-8'>
         <div className='mx-auto max-w-4xl'>          
           <p className='mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl'>
-            Let's handle your membership for you, {" "}
+            Let&apos;s handle your membership for you, {" "}
             <br className='hidden sm:inline lg:hidden' />
             {user?.name}
           </p>
