@@ -58,7 +58,7 @@ export const useUserStore = create<UserState>((set) => ({
     },
     loginWithOAuth: async (provider) => {
         try {
-            await account.createOAuth2Session(provider, 'http://localhost:3000/' , 'http://localhost:3000/auth/login' );
+            await account.createOAuth2Session(provider, process.env.NEXT_PUBLIC_CALLBACK, process.env.NEXT_PUBLIC_CALLBACK + '/auth/login' );
             // The user will be redirected for OAuth login, handle the response in your redirect URIs
             const session = await account.getSession('current');
             console.log(session);
