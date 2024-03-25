@@ -39,13 +39,13 @@ function UserButton( { user } : {user: User | null }) {
     ); 
   return (
   <DropdownMenu>
-  <DropdownMenuTrigger><Avatar name={user.name} round color="#0055D1" size="45" /></DropdownMenuTrigger>  
+  <DropdownMenuTrigger><Avatar name={user.name} round size="35" /></DropdownMenuTrigger>  
   <DropdownMenuContent>
     <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuItem>Profile</DropdownMenuItem>
     <DropdownMenuItem>Billing</DropdownMenuItem>
-    <DropdownMenuItem>Team</DropdownMenuItem>    
+    <DropdownMenuItem>Kids</DropdownMenuItem>    
     <DropdownMenuItem onClick={() => logOut()}><Link href='/'>Logout</Link></DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>

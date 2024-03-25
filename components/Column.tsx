@@ -40,11 +40,11 @@ function Column({id, todos, index}: Props) {
                     <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    className={`p-2 rounded-2xl shadow-sm ${snapshot.isDraggingOver ? "bg-green-200" : "bg-white/50"}`}
+                    className={`p-2 rounded-2xl shadow-sm ${snapshot.isDraggingOver ? "bg-green-200 dark:bg-green-800" : "bg-white/50 dark:bg-black/50"}`}
                     >
                         <h2 className='flex justify-between font-bold text-xl p-2'>  
                             {idToColumnText[id]}
-                            <span className='text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm font-normal'>
+                            <span className='text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 rounded-full px-2 py-1 text-sm font-normal'>
                                 {
                                     !searchString 
                                     ? todos.length 

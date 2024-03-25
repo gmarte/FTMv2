@@ -70,24 +70,22 @@ function Header() {
       <Link href='/'>
       <Image        
           src={logo}
-          alt="FAMILY TASK MANAGER"       
-          width={300} 
-          height={100}
-          className="w-20 md:w-28 pb-10 md:pb-0 object-contain"
+          alt="FAMILY TASK MANAGER"                 
+          className="w-10 md:w-18 pb-10 md:pb-0 object-contain"
       />
       </Link>
       <Link href='/'>
       {/* <h1 className="scroll-m-20 ml-2 text-4xl font-extrabold tracking-wider lg:text-4xl"> */}
-      <h1 className='ml-2 text-4xl font-extrabold tracking-wider sm:text-6xl'>
-      Family Task Manager
+      <h1 className='ml-2 text-sm font-extrabold tracking-wider sm:text-sm'>
+      FTM
       </h1>
       </Link>
       <div className='flex items-center space-x-5 flex-1 justify-end w-full'>                        
         { user ? (
           <>
-            <form className='flex items-center space-x-5 bg-white rounded-md p-1 shadow-md flex-1 md:flex-initial'>
-              <MagnifyingGlassIcon className='h6 w-6 text-gray-400' />
-              <input type='text' placeholder='Search' value={searchString} onChange={(e) => setSearchString(e.target.value)} className='flex-1 outline-none p-1' />
+            <form className='flex items-center space-x-5 bg-white dark:bg-black rounded-md p-1 shadow-md flex-1 md:flex-initial'>
+              <MagnifyingGlassIcon className='h6 w-6 text-gray-400 dark:text-white' />
+              <input type='text' placeholder='Search' value={searchString} onChange={(e) => setSearchString(e.target.value)} className='flex-1 dark:bg-black outline-none p-1 dark:text-white' />
               <button type='submit' hidden>Search</button>
             </form>            
           </>
